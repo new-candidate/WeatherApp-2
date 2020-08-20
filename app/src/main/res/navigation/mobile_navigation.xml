@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_signin">
+    <fragment
+        android:id="@+id/nav_signin"
+        android:name="ru.geekbrains.weatherapp_2.ui.googleAuth.SignIn"
+        tools:layout="@layout/signin_layout">
+        <action
+            android:id="@+id/action_signin_to_weather"
+            app:destination="@id/nav_gallery">
+            <argument
+                android:name="lng"
+                android:defaultValue="null" />
+            <argument
+                android:name="lat"
+                android:defaultValue="null" />
+        </action>
+        <action
+            android:id="@+id/action_signin_to_citychoice"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="ru.geekbrains.weatherapp_2.ui.cityChoice.CityChoiceFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home">
+        <argument
+            android:name="cityBack"
+            android:defaultValue="null"
+            app:argType="string" />
+        <action
+            android:id="@+id/confirmationAction"
+            app:destination="@id/nav_gallery" >
+            <argument
+                android:name="cityOn"
+                android:defaultValue="Berlin"
+                />
+            <argument
+                android:name="lng"
+                android:defaultValue="null" />
+            <argument
+                android:name="lat"
+                android:defaultValue="null" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="ru.geekbrains.weatherapp_2.ui.weatherToday.WeatherTodayFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery">
+        <action
+            android:id="@+id/action_error_nav_home"
+            app:destination="@id/nav_home">
+            <argument
+                android:name="cityBack"
+                android:defaultValue="null"
+                app:argType="string" />
+        </action>
+        <argument
+            android:name="cityOn"
+            android:defaultValue="Berlin"
+            app:argType="string" />
+        <argument
+            android:name="lat"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="lng"
+            android:defaultValue="null"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_gallery_self"
+            app:destination="@id/nav_gallery" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="ru.geekbrains.weatherapp_2.ui.historyWeather.HistoryWeatherFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" >
+        <argument
+            android:name="lat"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+        <argument
+            android:name="lng"
+            app:argType="string"
+            android:defaultValue="null" />
+    </fragment>
+    <action android:id="@+id/action_global_nav_gallery" app:destination="@id/nav_gallery" />
+</navigation>
